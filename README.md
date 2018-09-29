@@ -1,5 +1,7 @@
 # k8s-playbook
 
+Create A K8S Cluster, for Dev Experimenting.
+
 # How to Run 
 
 > ./main.sh 
