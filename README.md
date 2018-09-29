@@ -8,4 +8,4 @@ Create A K8S Cluster, for Dev Experimenting.
 
 > ./main.sh 
 
-It will create 3 Digital Ocean Droplets and run the playbooks. 
+It will create 3 Digital Ocean Droplets and generate a hosts file for the playbooks. 
