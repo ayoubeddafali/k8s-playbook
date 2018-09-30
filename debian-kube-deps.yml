@@ -1,0 +1,32 @@
+- hosts: all
+  remote_user: root 
+  become: yes
+  roles:
+    - role: docker-role 
+
+- hosts: all
+  remote_user: root 
+  become: yes
+  tasks:
+   - name: Install packages 
+     shell: apt-get update && apt-get install -y apt-transport-https
+
+   - name: Add Gpg key  
+     shell: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+   - name: Add repo 
+     shell: echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+
+   - name: Update repo 
+     shell: apt-get update
+     
+   - name: Install kubectl kubeadm kubelet
+     shell: apt-get install -y kubelet kubeadm kubectl
+
+   - name: net bridge set  to 1   
+     shell: sudo sysctl net.bridge.bridge-nf-call-iptables=1 
+
+   - name: Swapp  Off  
+     shell: swapoff -a 
+     
+

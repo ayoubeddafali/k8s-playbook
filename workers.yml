@@ -11,6 +11,9 @@
       set_fact:
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
 
+    - name: Debug Join command 
+      debug:
+        msg: "{{ join_command }}"
 
 - hosts: workers
   remote_user: root 

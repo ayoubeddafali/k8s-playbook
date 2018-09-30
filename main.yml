@@ -1,0 +1,19 @@
+--- #
+# Setup/install tasks.
+- hosts: all 
+  gather_facts: true 
+  remote_user: root 
+  tasks: 
+    - name: Starting 
+      debug: 
+        msg: "Starting "
+        
+- import_playbook: redhat-kube-deps.yml
+  when: ansible_os_family == 'RedHat'
+
+- import_playbook: debian-kube-deps.yml
+  when: ansible_os_family == 'Debian'
+
+- import_playbook: master.yml 
+
+- import_playbook: workers.yml

@@ -1,22 +1,13 @@
 - hosts: all
   remote_user: root 
   become: yes
+  roles:
+    - role: docker-role 
+
+- hosts: all
+  remote_user: root 
+  become: yes
   tasks:
-   - name: Disable SELinux
-     selinux:
-      state: disabled
-     
-   - name: install Docker
-     yum:
-       name: docker
-       state: present
-       update_cache: true
-
-   - name: start Docker
-     service:
-       name: docker
-       state: started
-
    - name: disable SELinux
      command: setenforce 0
 
@@ -36,6 +27,12 @@
       value: 1
       state: present
 
+   - name: net bridge set  to 1   
+     shell: sudo sysctl net.bridge.bridge-nf-call-iptables=1 
+
+   - name: Swapp  Off  
+     shell: swapoff -a 
+     
    - name: add Kubernetes' YUM repository
      yum_repository:
       name: Kubernetes
